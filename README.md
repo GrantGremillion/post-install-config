@@ -17,11 +17,11 @@ In this tutorial, users will learn how to configure and manage osTicket by setti
 
 <h2>Post-Install Configuration Objectives</h2>
 
-- Item 1
-- Item 2
-- Item 3
-- Item 4
-- Item 5
+- Basic setup steps / login
+- Adding Roles, Departments, and Teams
+- Adding Agents and Users
+- Configuring SLA's
+- Help Topics
 
 
 <h2>Configuration Steps</h2>
