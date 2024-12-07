@@ -26,158 +26,99 @@ In this tutorial, users will learn how to configure and manage osTicket by setti
 
 <h2>Configuration Steps</h2>
 
-![image](https://github.com/user-attachments/assets/167e9e99-374b-4556-b04b-e721d347af28)
+![image](https://github.com/user-attachments/assets/7e7aba1f-5a26-4089-8458-0fc6bb8f2376)
+
 
 <p>
-When setting up the VM, create a new resource group and assign the vm to that group. Then, give your vm a name and make it a Windows 10 pro version 22H2 with a size of at least 2 vcpus and 8GB memory. Also create a username and password for your vm while making sure to take note of both in a notepad. After everything is ready, press review + create and then create.
+Start by using remote desktop to access the vm we set up and created in the last walkthrough (osticket-prereqs)
 </p>
 <br />
 
-![image](https://github.com/user-attachments/assets/f0bd3ebb-019a-472d-864d-0d69643f1db5)
+![image](https://github.com/user-attachments/assets/040dea27-9fe8-4c92-9a9a-30264e0f927d)
 
 <p>
-Once the vm has finished deploying, use a remote desktop client to access the vm (In the image, I am using Windows built in Remote Desktop Client). You will need the public IP of the machine as well as the credentials you created for it.
+To access the Admin/Analyst page for osTicket, use the following link - http://localhost/osTicket/scp/login.php <br />
+To access the Client/End User side of osTicket, use the following link - http://localhost/osTicket
+Go ahead and log into the Admin page using the credentials you set up when installing osTicket. This should be in your notepad file. Once you are logged in, you will be able to switch between the agent and admin role through the Admin Panel and Agent Panel links at the top of the page:
 </p>
 <br />
 
-![image](https://github.com/user-attachments/assets/2734156c-25f6-4331-9d8f-13257ce753c3)
+![image](https://github.com/user-attachments/assets/2d381773-9a3c-400d-adb8-a3037e9205da)
+
+![image](https://github.com/user-attachments/assets/f8e147d9-9a7c-4ee4-894c-03590f9cf037)
+
 <p>
-When you are inside the vm, download the following files inside the vm - https://drive.google.com/uc?export=download&id=1b3RBkXTLNGXbibeMuAynkfzdBC1NnqaD 
-You can just copy the link inside of the Edge browser. Once is is downloaded, extract it somewhere on your computer. We will use the files in this folder to install osTicket and some of the dependencies.
+From within the Admin Panel, we will now configure a role that will have the ability to make any changes they want. To do so, navigate to Agents > Roles > Add New Role. Name the role "Supreme Admin", then under the permissions tab, make sure all boxes are checked. This includes all boxes under the tickets and tasks tabs. Lastly, click Add Role.
 </p>
 <br />
 
+![image](https://github.com/user-attachments/assets/c36ee981-69e1-4f27-9c61-1febac8b0e20)
 
-![image](https://github.com/user-attachments/assets/3d91a441-144f-4fe5-b1cd-c422499c1e9a)
 <p>
-For the next step, we will be enabling Internet Information Services (IIS) within Windows. osTicket is a web-based application, and IIS is required to serve its files and handle HTTP requests.
-To do so, open the control pannel and click Programs > Turn Windows features on or off and check the Internet Information Services and CGI boxes
+Next, we will add a new department. To do this, go to Agents > Departments > Add New Department > Name your department "SysAdmins". Leave everything else as default and click Create Dept
 </p>
 <br />
 
-![image](https://github.com/user-attachments/assets/f9e90279-2e2a-4703-90cd-cd7c28244193)
+![image](https://github.com/user-attachments/assets/95566d9a-2c43-4374-88f9-03f5e0e5767c)
 
 <p>
-Now, if you go into edge and enter the IP address 127.0.0.1 (Your lookback IP address), you should be presented with a default windows server page that looks similar to the image above.
+Now, we will create a team which can be assigned tickets. This can be done through Agents > Teams > Add New Team. Name the team anything. I will call mine "Online Banking". Then click Create Team.
 </p>
 <br />
 
+![image](https://github.com/user-attachments/assets/1ba689b3-04cc-41f4-9096-ca48e21d4f71)
 
-![image](https://github.com/user-attachments/assets/511082c0-88ca-47df-97e9-e8d6dc582390)
 
 <p>
-Next, we will be running some of the installation files from the folder we set up earlier (osTicket-Installation-Files) to set up all the dependancies for osTicket
-Start by running the PHPManagerForIIS file and walk through the installation leaving everything as default
-Next, run the rewrite_amd64_en-US file and walk through the installation leaving everything as default
-Now, we will need to create a folder called "PHP" inside the C drive and unzip the contents of the PHP 7.3.8 (php-7.3.8-nts-Win32-VC15-x86.zip) file into that PHP folder 
-Then, run the VC_redist.x86 file. Next, install mysql through the mysql-5.5.62-win32.msi file and leave everything as default aside from the user and password which can both be set to "root". Also make sure you select the Typical installation method and Standard Configuration.
-
+Next, we will create two agents from different depratments that will be able to assist end users with tickets. We can do this through Agents > Add New Agent . Name the agents anything. Make sure to record the credentials for both Agents inside a notepad. When creating the passwords, you will click Set Password, and then uncheck the "Send the agent a password reset email" box. Also, make sure that the "Require password change at next login" box is unchecked. When making the first Agent, go to the Access tab and change the primary department and role to be the ones we created earlier. Also add this Agent to the team we made through the Teams tab.
 </p>
 <br />
 
-![image](https://github.com/user-attachments/assets/a1a2f681-a3de-439c-a3e2-a7278c8d00e9)
+![image](https://github.com/user-attachments/assets/72abd2f3-3824-465b-95d1-bd3b05663b0e)
+
+
 <p>
-Next, we will need to open the IIS manager as an admin (right click and select "Run as administrator")
+When creating the second Agent, put them in the Support department and give them a role of View Only.
 </p>
 <br />
 
-![image](https://github.com/user-attachments/assets/b7d639bf-dd1d-4cc6-846e-a112562c25aa)
 <p>
-Next, we need to register PHP through the IIS manager (Show the computer where the PHP installation exists)
-We can do this in the IIS manager my clicking PHP manager, Register new version of PHP, and then selecting the php-cgi Application file inside the PHP we created on the C drive earlier.
+Now we will create an account for an end user that can open tickets. To do this, navigate to the Agent Panel > Users > Add User. Give them a name and email, then click Add User.
 </p>
 <br />
 
-![image](https://github.com/user-attachments/assets/a86507d7-a4b9-410f-bc77-46ed80195560)
-<p>
-Then, we will need to stop and start the IIS server for the changes to take effect
-</p>
-<br />
+![image](https://github.com/user-attachments/assets/7b7b850d-b5d1-4d10-8935-ab659f3e5483)
 
-![image](https://github.com/user-attachments/assets/6b956a6e-1f8e-443a-ac93-4d044e675f76)
 <p>
-Now, we can extract the contents of the osTicket-v1.15.8.zip into the same folder it is in.
-Copy the “upload” folder into “c:\inetpub\wwwroot”
-Within “c:\inetpub\wwwroot”, Rename “upload” to “osTicket”
-We will need to start and stop the IIS server after this again.
+Next, we will set and configure a few Service Level Agreements (SLA's). The purpose of this is to set time frames for when tickets of a specific severity should be responded to or resolved. To add them go to Admin Panel > Manage > SLA > Add new SLA Plan. 
+Add the following SLA Plans:
+
+Name: Sev-A (Grace Period: 1 hour, Schedule: 24/7)
+Name: Sev-B (Grace Period: 4 hours, Schedule: 24/7)
+Name: Sev-C (Grace Period: 8 hours, Business Hours)
 
 </p>
 <br />
 
-![image](https://github.com/user-attachments/assets/9fb8bea6-3fc7-4120-9d03-2472f5c0640f)
+![image](https://github.com/user-attachments/assets/c612cee6-2806-4dde-aa7f-8a244bb9dc98)
+
+![image](https://github.com/user-attachments/assets/09c87c90-dd92-4c53-963c-74acb0824dfc)
+
 <p>
-We can view the osTicket landing page through servername > Sites > osTicket and the press "Browse *.80(http)" on the right side which should result in the following web page appearing:
+Lastly, we will create a few Help Topics which will be helpful for categorizing the type of tickets submitted. To add them, got to Manage > Help Topics > Add New Help Topic. Create a help topic for each of the following:
+Business Critical Outage,
+Personal Computer Issues,
+Equipment Request,
+Password Reset,
+Other
+The final result of all help topics should look like the following.
 </p>
 <br />
 
-![image](https://github.com/user-attachments/assets/901f623b-38d4-40a5-a2ab-af87a784bd6d)
+![image](https://github.com/user-attachments/assets/f2038a3b-11a1-46d9-842c-f4045ac8d0b9)
 
 <p>
-Notice that some extensions are not enabled
-Go back to IIS, sites > Default > osTicket
-Double-click PHP Manager
-Click “Enable or disable an extension”
-Enable: php_imap.dll
-Enable: php_intl.dll
-Enable: php_opcache.dll
-Refresh the osTicket site in your browser, observe the changes
+Congratulations! This section of the walkthrough is complete and you can now move onto the tickets-lifecycle section
 </p>
 <br />
-
-![image](https://github.com/user-attachments/assets/7c35e725-7070-4624-a1ff-da3f391bf136)
-
-<p>
-Navigate to the file shown above called ost-sampleconfig.php. We will need to rename this to ost-config.php
-Next, we will need to edit the file so that osTIcket has access to it
-Right click the file > Properties > Security > Advanced > Disable inheritance > Remove all inherited permissions 
-</p>
-<br />
-
-![image](https://github.com/user-attachments/assets/d61f036f-9538-4792-8928-42ba5d4c3e21)
-
-<p>
-Now, we need to add a new principal. Click Add > Select a principal > Type everyone into the last box > Check Names > ok > check the full control box > Apply > ok
-</p>
-<br />
-
-![image](https://github.com/user-attachments/assets/3b7bfb69-bbf0-4814-ae82-8f1c87a4ba39)
-<p>
-We can now continue setting up our osTicket installation in the browser. Give your helpdesk a name, and a default email(receives email from customers)
-. Set up your admin user (take note of the username and password in notepad)
-</p>
-<br />
-
-![image](https://github.com/user-attachments/assets/75c535d4-9bab-473f-8933-320f77487cda)
-
-<p>
-Before clicking Install now, we need to install heidiSQL from the installation files folder. Leave all installation options as default. This is necessary so that our osTicket has a database to connect to and store its information
-</p>
-<br />
-
-![image](https://github.com/user-attachments/assets/06e645de-407f-4ed1-a2a8-d20e8ee4ddfb)
-
-<p>
-After the installation has finished, click New at the bottom left and make sure the user and password fields are both "root" like we specified before. Then click Open. If successful, the following page will be displayed showing all database connections.
-</p>
-<br />
-
-![image](https://github.com/user-attachments/assets/c374cdbd-8ffd-4688-8acd-3f676efb7530)
-
-
-<p>
-We will now create our database that osTicket will use by right clicking the Dolphin picture with "Unamed" next to it and click create new > database. Name the database osTicket. Once the database is created, we can finalize the osTicket installation process. Fill out the remaining database setting section as follows with a password of root:
-</p>
-<br />
-
-![image](https://github.com/user-attachments/assets/b72736d4-30d5-4405-b9e2-d40e06d4e5b1)
-
-<p>
-Good job, hopefully it is installed with no errors!
-Browse to your help desk login page: http://localhost/osTicket/scp/login.php
-
-End Users osTicket URL:
-http://localhost/osTicket/ 
-
-
-
 
