@@ -78,7 +78,7 @@ Next, we will create two agents from different depratments that will be able to 
 
 
 <p>
-When creating the second Agent, put them in the Support department and give them a role of View Only.
+When creating the second Agent, put them in the Support department and give them a role of All Access.
 </p>
 <br />
 
