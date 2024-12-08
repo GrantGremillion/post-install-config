@@ -45,6 +45,8 @@ Go ahead and log into the Admin page using the credentials you set up when insta
 
 ![image](https://github.com/user-attachments/assets/2d381773-9a3c-400d-adb8-a3037e9205da)
 
+<h2>Roles, Admins, and Teams</h2>
+
 ![image](https://github.com/user-attachments/assets/f8e147d9-9a7c-4ee4-894c-03590f9cf037)
 
 <p>
@@ -65,6 +67,8 @@ Next, we will add a new department. To do this, go to Agents > Departments > Add
 Now, we will create a team which can be assigned tickets. This can be done through Agents > Teams > Add New Team. Name the team anything. I will call mine "Online Banking". Then click Create Team.
 </p>
 <br />
+
+<h2>Agents and Users</h2>
 
 ![image](https://github.com/user-attachments/assets/1ba689b3-04cc-41f4-9096-ca48e21d4f71)
 
@@ -87,6 +91,8 @@ Now we will create an account for an end user that can open tickets. To do this,
 </p>
 <br />
 
+<h2>SLA's</h2>
+
 ![image](https://github.com/user-attachments/assets/7b7b850d-b5d1-4d10-8935-ab659f3e5483)
 
 <p>
@@ -101,6 +107,8 @@ Name: Sev-C (Grace Period: 8 hours, Business Hours)
 <br />
 
 ![image](https://github.com/user-attachments/assets/c612cee6-2806-4dde-aa7f-8a244bb9dc98)
+
+<h2>Help Topics</h2>
 
 ![image](https://github.com/user-attachments/assets/09c87c90-dd92-4c53-963c-74acb0824dfc)
 
